@@ -20,18 +20,11 @@ class TopNavbarHelper extends AbstractHelper
 
     public function getNavbarScript($view)
     {
-        $navParamsJson = json_encode($view->topNavbarParams);
-        return "require([
-		            'dojo/dom',
-		            'rgrid/NavMenu'
-	            ], function (
-	            	dom,
-	            	NavMenu,
-	            ) {
-	            	const layoutConfig = JSON.parse($navParamsJson),
-	            		navPanes = new NavMenu({layoutConfig: layoutConfig});
-	            	navPanes.placeAt(dom.byId('r-nav-dropdowns'));
-	            })
-        ";
+        $topNavParamsJson = json_encode($view->topNavbarParams);
+        return "require(['dojo/dom','rgrid/NavMenu'], function (dom, NavMenu) {
+	            	const menuConfig = JSON.parse('$topNavParamsJson'),
+	            		navMenu= new NavMenu({menuConfig: menuConfig});
+	            	navMenu.placeAt(dom.byId('r-nav-dropdowns'));
+	            });";
     }
 }

@@ -29,8 +29,25 @@ class NavPageMiddleware extends AbstractViewMiddleware
                     'label' => 'pane 1',
                     'content' => [
                         [
-                            'label' => 'service 1',
+                            'label' => 'page 1',
                             'uri' => 'service/1/uri'
+                        ],
+                        [
+                            'label' => 'page 2',
+                            'uri' => 'service/2/uri'
+                        ],
+                    ]
+                ],
+                [
+                    'label' => 'pane 2',
+                    'content' => [
+                        [
+                            'label' => 'page 1',
+                            'uri' => 'service/1/uri'
+                        ],
+                        [
+                            'label' => 'page 2',
+                            'uri' => 'service/2/uri'
                         ],
                     ]
                 ]
@@ -43,8 +60,34 @@ class NavPageMiddleware extends AbstractViewMiddleware
                             'label' => 'service 1',
                             'uri' => 'service/1/uri'
                         ],
+                        [
+                            'label' => 'service 2',
+                            'uri' => 'service/1/uri'
+                        ],
                     ]
-                ]
+                ],
+        [
+            'label' => 'pane 2',
+            'content' => [
+                [
+                    'label' => 'service 3',
+                    'uri' => 'service/1/uri'
+                ],
+                [
+                    'label' => 'service 4',
+                    'content' => [
+                        [
+                            'label' => 'subservice 1',
+                            'uri' => 'subservice/1/uri'
+                        ],
+                        [
+                            'label' => 'subservice 2',
+                            'uri' => 'subservice/1/uri'
+                        ],
+                    ]
+                ],
+            ]]
+
             ],
         ];
     }

@@ -1,28 +1,11 @@
 <?php
-$paramsString = json_encode($this->navigationParams);
-?>
+$this->dojo()->setDebug(true);
+$this->dojo()->addLoader();
+$this->addTopNavbarContent();
+$this->addLeftNavbarContent(); ?>
 <h1>Контент</h1>
-<script>
-	require([
-		'dojo/dom-class',
-		'dojo/_base/window',
-		'dojo/dom',
-		'rgrid/NavPanes'
-	], function (domClass,
-				 window,
-				 dom,
-				 NavPanes,
-	) {
-		domClass.add(window.body(), 'flat');
-		const testPanesLayout = JSON.parse('<?= $paramsString?>'),
-			navPanes = new NavPanes({layoutConfig: testPanesLayout});
-		navPanes.placeAt(dom.byId('r-nav-list'));
-	})
-</script>
-<div id='some-content'></div>
-<?php $this->dojo()->setDebug(true);
-$this->dojo()->addLoader(); ?>
-<?php $this->addTopNavbarContent();?>
-<?php $this->addLeftNavbarContent(); ?>
+<div id='some-content'>
+    всякая полезная информация
+</div>
 
 

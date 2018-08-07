@@ -18,20 +18,14 @@ class LeftNavbarHelper extends AbstractHelper
         $view = $this->getView();
         $view->headScript()->appendScript($this->getNavbarScript($view));
     }
+
     public function getNavbarScript($view)
     {
-        $navParamsJson = json_encode($view->leftNavbarParams);
-        return "require([
-		            'dojo/dom',
-		            'rgrid/NavMenu'
-	            ], function (
-	            	dom,
-	            	NavMenu,
-	            ) {
-	            	const layoutConfig = JSON.parse($navParamsJson),
-	            		navPanes = new NavMenu({menuConfig: layoutConfig});
-	            	navPanes.placeAt(dom.byId('r-nav-dropdowns'));
-	            })
-        ";
+        $leftNavParamsJson = json_encode($view->leftNavbarParams);
+        return "require(['dojo/dom','rgrid/NavPanes'], function (dom,NavPanes) {
+	            	const layoutConfig = JSON.parse('$leftNavParamsJson'),
+	            		navPanes = new NavPanes({layoutConfig: layoutConfig});
+	            	navPanes.placeAt(dom.byId('r-nav-list'));
+	            });";
     }
 }

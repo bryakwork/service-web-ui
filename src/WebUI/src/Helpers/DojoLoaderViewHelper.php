@@ -122,10 +122,8 @@ class DojoLoaderViewHelper extends AbstractHelper
         $view->headLink()->appendStylesheet('https://ajax.googleapis.com/ajax/libs/dojo/1.11.1/dojo/resources/dojo.css')
              ->appendStylesheet("https://cdn.jsdelivr.net/npm/rgrid@$this->rgridVersion/themes/flat/flat.css");
         $view->headScript()->appendFile('https://ajax.googleapis.com/ajax/libs/dojo/1.11.1/dojo/dojo.js');
-        $view->headScript()->appendScript("require(['dojo/dom-class','dojo/_base/window'], 
-                                            function (domClass, window) {
-	                                            domClass.add(window.body(), \"flat\");
-	                                        });");
+        $view->inlineScript()->appendScript("require(['dojo/dom-class','dojo/_base/window'], 
+                                          (domClass, window) => {domClass.add(window.body(), 'flat');});");
     }
 
     protected function getRgridConfigUrl()
