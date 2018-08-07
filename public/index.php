@@ -20,9 +20,9 @@ call_user_func(function () {
     \rollun\dic\InsideConstruct::setContainer($container);
     //inject token to container
     $lifeCycleToke = LifeCycleToken::generateToken();
-    if(get_all_headers() && array_key_exists("LifeCycleToken", get_all_headers())) {
+/*    if(get_all_headers() && array_key_exists("LifeCycleToken", get_all_headers())) {
         $lifeCycleToke->unserialize(get_all_headers()["LifeCycleToken"]);
-    }
+    }*/
     $container->setService(LifeCycleToken::class, $lifeCycleToke);
     /** @var \Zend\Expressive\Application $app */
     $app = $container->get(\Zend\Expressive\Application::class);

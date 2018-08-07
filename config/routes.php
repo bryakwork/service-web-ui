@@ -14,3 +14,5 @@
  */
 
 /** @var \Zend\Expressive\Application $app */
+
+$app->route('/', 'navigationPage', ['GET'], 'navigationPage');
