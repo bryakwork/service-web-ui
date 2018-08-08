@@ -14,26 +14,29 @@
     <?= $this->headScript() ?>
 </head>
 <style>
-    body {
-        max-width: 100%;
-        max-height: 100%;
+    html, body {
+        width: 100%;
+        height: 100%;
         background-color: lightgray;
     }
-
     .r-event-sidebar {
-        overflow-y: scroll;
-    }
 
+    }
     .r-content-container {
         font-size: 0.8rem;
         width: 1200px;
         background-color: #fff;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
-
     .r-content-column {
-        height: -webkit-fill-available;
         min-height: fit-content;
+    }
+    .r-column-label {
+        margin: 1.5rem 0.25rem 0.75rem 0.25rem;
+        text-align: center;
+        font-weight: 500;
+        line-height: 1.2;
+        font-size: 1.125rem;
     }
 
 </style>
@@ -41,15 +44,18 @@
     return '#';
 };?>
 <body>
-<nav class="navbar navbar-dark bg-dark navbar-fixed-top">
-    <a class="navbar-brand" href="#">Rollun</a>
-    <div class="navbar-nav mr-auto" id="r-nav-dropdowns"></div>
+<nav id='navbar' class="navbar navbar-dark bg-dark navbar-fixed-top">
+    <a class="navbar-brand" href="#">
+        <img src="http://rollun.com/assets/img/logo.jpg" style="max-height: 1.5rem; margin-left: 1em"></a>
+    <div class="navbar-nav justify-content-center" id="r-nav-dropdowns"></div>
     <div class="navbar-form navbar-right">
         <div class="input-group">
             <div class="input-group-prepend">
-                <i class="input-group-text fas fa-search"></i>
+                <div class="input-group-text">
+                    <i class="fas fa-search"></i>
+                </div>
             </div>
-            <input type="text" class="form-control" placeholder="Найти страницу" style="min-width: 15rem">
+            <input type="text" class="form-control form-control-sm" placeholder="Найти страницу" style="min-width: 15rem">
         </div>
     </div>
 </nav>
@@ -57,15 +63,56 @@
 <div class="container-fluid p-0 r-content-container" id="r-content-container">
     <div class="row m-0">
         <div class="col-md-2 sidebar p-1 r-nav-list" id="r-nav-list">
-            <?= $this->lsb(); ?>
+            <div class="r-column-label">МЕНЮ</div>
         </div>
-        <div class="col-md-8 main p-1 border-right border-left r-content-column">
+        <div class="col-md-8 main px-2 py-1 border-right border-left r-content-column" id="r-content-column">
+            <div class="r-column-label" style="font-size: 1.5rem">ТЕСТОВАЯ СТРАНИЦА</div>
             <?php echo $this->content ?>
         </div>
         <div class="col-md-2 p-1 r-event-sidebar">
-            <div class="card p-1 m-1">
+            <div class="r-column-label">УВЕДОМЛЕНИЯ</div>
+            <div class="card mb-1">
+                <div class="mb-1 px-1 card-title bg-info">
+                    <div>
+                        Уведомление
+                        <i class="fas fa-times" style="position: relative; float: right; margin: 2px; color: white;"></i>
+                    </div>
+                </div>
                 <div class="card-body p-1">
                     <p class="card-text">Здесь в ближайшем будущем появятся системные уведомления, еееее! </p>
+                </div>
+            </div>
+            <div class="card mb-1">
+                <div class="mb-1 px-1 card-title bg-danger">
+                    <div>
+                        Критическая ошибка
+                        <i class="fas fa-times" style="position: relative; float: right; margin: 2px; color: white;"></i>
+                    </div>
+                </div>
+                <div class="card-body p-1">
+                    <p class="card-text">CСообщение о критической ошибке</p>
+                </div>
+            </div>
+            <div class="card mb-1">
+                <div class="mb-1 px-1 card-title bg-warning">
+                    <div>
+                        Ошибка
+                        <i class="fas fa-times" style="position: relative; float: right; margin: 2px; color: white;"></i>
+                    </div>
+                </div>
+                <div class="card-body p-1">
+                    <p class="card-text">Сообщение об ошибке</p>
+                </div>
+            </div>
+            <div class="card mb-1">
+                <div class="mb-1 px-1 card-title bg-success">
+                    <div>
+                        Успех
+                        <i class="fas fa-times" style="position: relative; float: right; margin: 2px; color: white;"></i>
+                    </div>
+                </div>
+                <div class="card-body p-1">
+                    <p class="card-text">Сообщение об успехе</p>
                 </div>
             </div>
         </div>

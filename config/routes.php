@@ -15,4 +15,5 @@
 
 /** @var \Zend\Expressive\Application $app */
 
-$app->route('/', 'navigationPage', ['GET'], 'navigationPage');
+//template name is parsed from route name (<namespace>-<templateName>)
+$app->route('/', 'navigationPage', ['GET'], 'webUi-homepage');

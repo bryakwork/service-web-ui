@@ -1,6 +1,6 @@
 <?php
 
-namespace rollun\webUI;
+namespace rollun\webUI\Middleware;
 
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
@@ -13,23 +13,19 @@ use rollun\actionrender\Renderer\Html\HtmlParamResolver;
  * Date: 31.07.2018
  * Time: 16:35
  */
-abstract class AbstractViewMiddleware implements MiddlewareInterface
+abstract class AbstractViewActionMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $queryParams = $request->getQueryParams();
-        $newQueryParams = array_merge($this->getViewParams(), $queryParams);
+        //добавить сюда слияние с requestParams из запроса
+        $responseParams = $request->getAttribute('responseData');
+        $responseParams = isset($responseParams)? $responseParams: [];
+        $newQueryParams = array_merge($this->getViewParams(), $responseParams);
         $request = $request->withAttribute('responseData', $newQueryParams);
-        $request = $request->withAttribute(HtmlParamResolver::KEY_ATTRIBUTE_TEMPLATE_NAME, $this->getTemplateName());
 
         $response = $delegate->process($request);
         return $response;
     }
-
-    /**
-     * @return string
-     */
-    abstract protected function getTemplateName();
 
     /**
      * @return mixed array -  params that will be passed to view helpers

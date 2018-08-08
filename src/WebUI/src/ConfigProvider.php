@@ -10,9 +10,10 @@ namespace rollun\webUI;
 
 
 use rollun\actionrender\Factory\ActionRenderAbstractFactory;
-use rollun\webUI\Helpers\DojoLoaderViewHelper;
-use rollun\webUI\Helpers\LeftNavbarHelper;
-use rollun\webUI\Helpers\TopNavbarHelper;
+use rollun\webUI\Middleware\NavPageActionMiddleware;
+use rollun\webUI\ViewHelper\DojoLoaderViewHelper;
+use rollun\webUI\ViewHelper\FitScreenHeightHelper;
+use rollun\webUI\ViewHelper\LayoutConfigHelper;
 use Zend\Expressive\Template\TemplateRendererInterface;
 use Zend\Expressive\ZendView\HelperPluginManagerFactory;
 use Zend\Expressive\ZendView\ZendViewRendererFactory;
@@ -35,10 +36,10 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                'web-ui' => [__DIR__ . '/../templates/'],
-                'web-ui-layouts' => [__DIR__ . '/../templates/layouts/']
+                'webUi' => [__DIR__ . '/../templates/'],
+                'webUiLayouts' => [__DIR__ . '/../templates/layouts/']
             ],
-            'layout' => 'web-ui-layouts::august-layout',
+            'layout' => 'webUiLayouts::august-layout',
         ];
     }
 
@@ -46,7 +47,7 @@ class ConfigProvider
     {
         return [
             'navigationPage' => [
-                ActionRenderAbstractFactory::KEY_ACTION_MIDDLEWARE_SERVICE => NavPageMiddleware::class,
+                ActionRenderAbstractFactory::KEY_ACTION_MIDDLEWARE_SERVICE => NavPageActionMiddleware::class,
                 ActionRenderAbstractFactory::KEY_RENDER_MIDDLEWARE_SERVICE => 'simpleHtmlJsonRendererLLPipe',
             ],
         ];
@@ -56,25 +57,25 @@ class ConfigProvider
     {
         return [
             'factories' => [
-                NavPageMiddleware::class => InvokableFactory::class,
+                NavPageActionMiddleware::class => InvokableFactory::class,
                 TemplateRendererInterface::class => ZendViewRendererFactory::class,
                 HelperPluginManager::class => HelperPluginManagerFactory::class,
             ]
         ];
     }
 
-    protected function getViewHelpers(){
+    protected function getViewHelpers()
+    {
         return [
             'aliases' => [
                 'dojo' => DojoLoaderViewHelper::class,
-                'addTopNavbarContent' => TopNavbarHelper::class,
-                'addLeftNavbarContent' => LeftNavbarHelper::class,
+                'addLayout' => LayoutConfigHelper::class,
+                'fitScreenHeight' => FitScreenHeightHelper::class,
             ],
             'factories' => [
                 DojoLoaderViewHelper::class => InvokableFactory::class,
-                TopNavbarHelper::class => InvokableFactory::class,
-                LeftNavbarHelper::class => InvokableFactory::class,
-
+                LayoutConfigHelper::class => InvokableFactory::class,
+                FitScreenHeightHelper::class => InvokableFactory::class
             ]
         ];
     }

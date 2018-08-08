@@ -1,11 +1,12 @@
 <?php
 $this->dojo()->setDebug(true);
 $this->dojo()->addLoader();
-$this->addTopNavbarContent();
-$this->addLeftNavbarContent(); ?>
-<h1>Контент</h1>
+$this->addLayout($this->navbarParams, $this->lsbParams);
+?>
+<h5>Контент</h5>
 <div id='some-content'>
     всякая полезная информация
 </div>
+<?= $this->fitScreenHeight()?>
 
 

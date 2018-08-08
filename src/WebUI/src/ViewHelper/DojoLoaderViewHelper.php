@@ -6,7 +6,7 @@
  * Time: 18:32
  */
 
-namespace rollun\webUI\Helpers;
+namespace rollun\webUI\ViewHelper;
 
 
 use Exception;
@@ -14,7 +14,7 @@ use Zend\View\Helper\AbstractHelper;
 
 class DojoLoaderViewHelper extends AbstractHelper
 {
-    protected $rgridVersion = '0.4.22';
+    protected $rgridVersion = '0.4.24';
     protected $rollunRqlVersion = '0.3.8';
     protected $debugMode = false;
 
@@ -119,8 +119,10 @@ class DojoLoaderViewHelper extends AbstractHelper
         $view = $this->getView();
         $dojoConfigString = $this->generateDojoConfig();
         $view->headScript()->appendScript("var dojoConfig = JSON.parse('$dojoConfigString');");
-        $view->headLink()->appendStylesheet('https://ajax.googleapis.com/ajax/libs/dojo/1.11.1/dojo/resources/dojo.css')
-             ->appendStylesheet("https://cdn.jsdelivr.net/npm/rgrid@$this->rgridVersion/themes/flat/flat.css");
+        $view->headLink()
+            //->appendStylesheet('https://ajax.googleapis.com/ajax/libs/dojo/1.11.1/dojo/resources/dojo.css')
+            ->appendStylesheet("https://cdn.jsdelivr.net/npm/rgrid@$this->rgridVersion/themes/flat/flat.css")
+            ->appendStylesheet("https://cdn.jsdelivr.net/npm/rgrid@$this->rgridVersion/lib/css/rgrid.css");
         $view->headScript()->appendFile('https://ajax.googleapis.com/ajax/libs/dojo/1.11.1/dojo/dojo.js');
         $view->inlineScript()->appendScript("require(['dojo/dom-class','dojo/_base/window'], 
                                           (domClass, window) => {domClass.add(window.body(), 'flat');});");
