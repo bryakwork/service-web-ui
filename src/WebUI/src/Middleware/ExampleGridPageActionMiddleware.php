@@ -2,22 +2,31 @@
 /**
  * Created by PhpStorm.
  * User: USER_T
- * Date: 01.08.2018
- * Time: 19:19
+ * Date: 09.08.2018
+ * Time: 14:35
  */
 
 namespace rollun\webUI\Middleware;
 
 
-class NavPageActionMiddleware extends AbstractViewActionMiddleware
+use rollun\webUI\ViewHelper\LeftSideBarHelper;
+
+class ExampleGridPageActionMiddleware extends AbstractViewActionMiddleware
 {
+
     /**
      * @return mixed array -  params that will be passed to view helpers
      */
     protected function getViewParams()
     {
         return [
-            'lsbParams' => [
+            'rgridParams' => [
+                [
+                    'id' => 'gridTarget',
+                    'url' => '/api/datastore/equipments',
+                ],
+            ],
+            LeftSideBarHelper::KEY_PARAMS => [
                 [
                     'label' => 'pane 1',
                     'content' => [

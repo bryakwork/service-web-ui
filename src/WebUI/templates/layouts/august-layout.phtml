@@ -24,7 +24,7 @@
     }
     .r-content-container {
         font-size: 0.8rem;
-        width: 1200px;
+        width: 1400px;
         background-color: #fff;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
@@ -59,19 +59,17 @@
         </div>
     </div>
 </nav>
-<?= $this->inlineScript() ?>
 <div class="container-fluid p-0 r-content-container" id="r-content-container">
     <div class="row m-0">
         <div class="col-md-2 sidebar p-1 r-nav-list" id="r-nav-list">
             <div class="r-column-label">МЕНЮ</div>
         </div>
-        <div class="col-md-8 main px-2 py-1 border-right border-left r-content-column" id="r-content-column">
-            <div class="r-column-label" style="font-size: 1.5rem">ТЕСТОВАЯ СТРАНИЦА</div>
+        <div class="col-md-8 main px-1 border-right border-left r-content-column" id="r-content-column">
             <?php echo $this->content ?>
         </div>
         <div class="col-md-2 p-1 r-event-sidebar">
             <div class="r-column-label">УВЕДОМЛЕНИЯ</div>
-            <div class="card mb-1">
+            <div class="card mb-2">
                 <div class="mb-1 px-1 card-title bg-info">
                     <div>
                         Уведомление
@@ -82,7 +80,7 @@
                     <p class="card-text">Здесь в ближайшем будущем появятся системные уведомления, еееее! </p>
                 </div>
             </div>
-            <div class="card mb-1">
+            <div class="card mb-2">
                 <div class="mb-1 px-1 card-title bg-danger">
                     <div>
                         Критическая ошибка
@@ -93,7 +91,7 @@
                     <p class="card-text">CСообщение о критической ошибке</p>
                 </div>
             </div>
-            <div class="card mb-1">
+            <div class="card mb-2">
                 <div class="mb-1 px-1 card-title bg-warning">
                     <div>
                         Ошибка
@@ -104,7 +102,7 @@
                     <p class="card-text">Сообщение об ошибке</p>
                 </div>
             </div>
-            <div class="card mb-1">
+            <div class="card mb-2">
                 <div class="mb-1 px-1 card-title bg-success">
                     <div>
                         Успех
@@ -118,5 +116,6 @@
         </div>
     </div>
 </div>
+<?= $this->inlineScript() ?>
 </body>
 </html>

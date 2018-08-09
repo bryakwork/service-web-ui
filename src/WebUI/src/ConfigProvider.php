@@ -12,8 +12,11 @@ namespace rollun\webUI;
 use rollun\actionrender\Factory\ActionRenderAbstractFactory;
 use rollun\webUI\Middleware\NavPageActionMiddleware;
 use rollun\webUI\ViewHelper\DojoLoaderViewHelper;
+use rollun\webUI\ViewHelper\Factory\NavbarHelperFactory;
 use rollun\webUI\ViewHelper\FitScreenHeightHelper;
-use rollun\webUI\ViewHelper\LayoutConfigHelper;
+use rollun\webUI\ViewHelper\LeftSideBarHelper;
+use rollun\webUI\ViewHelper\NavbarHelper;
+use rollun\webUI\ViewHelper\RgridHelper;
 use Zend\Expressive\Template\TemplateRendererInterface;
 use Zend\Expressive\ZendView\HelperPluginManagerFactory;
 use Zend\Expressive\ZendView\ZendViewRendererFactory;
@@ -69,13 +72,17 @@ class ConfigProvider
         return [
             'aliases' => [
                 'dojo' => DojoLoaderViewHelper::class,
-                'addLayout' => LayoutConfigHelper::class,
+                'addLsb' => LeftSideBarHelper::class,
+                'navbar' => NavbarHelper::class,
                 'fitScreenHeight' => FitScreenHeightHelper::class,
+                'addRgrid' => RgridHelper::class
             ],
             'factories' => [
                 DojoLoaderViewHelper::class => InvokableFactory::class,
-                LayoutConfigHelper::class => InvokableFactory::class,
-                FitScreenHeightHelper::class => InvokableFactory::class
+                LeftSideBarHelper::class => InvokableFactory::class,
+                FitScreenHeightHelper::class => InvokableFactory::class,
+                NavbarHelper::class => NavbarHelperFactory::class,
+                RgridHelper::class => InvokableFactory::class
             ]
         ];
     }

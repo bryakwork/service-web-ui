@@ -14,6 +14,7 @@ use Zend\View\Helper\AbstractHelper;
 
 class DojoLoaderViewHelper extends AbstractHelper
 {
+    protected $isInitialised = false;
     protected $rgridVersion = '0.4.24';
     protected $rollunRqlVersion = '0.3.8';
     protected $debugMode = false;
@@ -42,8 +43,8 @@ class DojoLoaderViewHelper extends AbstractHelper
     ];
 
     /**
-     * @param $libName {string} -
-     * @param $version {string} - semver string with required rgrid version;
+     * @param $libName {string} - lib name
+     * @param $version {string} - semver string with required version;
      * @throws Exception
      */
     public function changeVersion($libName, $version)
@@ -66,6 +67,9 @@ class DojoLoaderViewHelper extends AbstractHelper
 
     }
 
+    /**
+     * @return array
+     */
     public function getVersions()
     {
         return [
@@ -74,11 +78,18 @@ class DojoLoaderViewHelper extends AbstractHelper
         ];
     }
 
+    /**
+     * @param $packageName
+     * @param $url
+     */
     public function register($packageName, $url)
     {
         $this->packages[] = ['name' => $packageName, 'location' => $url];
     }
 
+    /**
+     * @param $packages array
+     */
     public function multiRegister($packages)
     {
         foreach ($packages as $package) {
@@ -86,6 +97,9 @@ class DojoLoaderViewHelper extends AbstractHelper
         }
     }
 
+    /**
+     * @param $isDebug bool
+     */
     public function setDebug($isDebug)
     {
         $this->debugMode = $isDebug;
@@ -93,9 +107,11 @@ class DojoLoaderViewHelper extends AbstractHelper
 
     public function addLoader()
     {
-
+        if ($this->isInitialised) {
+            return;
+        }
         $rgridUrl = "https://cdn.jsdelivr.net/npm/rgrid@$this->rgridVersion/lib";
-        $rollunRqlUrl = "https://cdn.jsdelivr.net/npm/rgrid@$this->rollunRqlVersion/";
+        $rollunRqlUrl = "https://cdn.jsdelivr.net/npm/rollun-rql@$this->rollunRqlVersion/";
         $rgridExamplesUrl = "https://cdn.jsdelivr.net/npm/rgrid@$this->rgridVersion/example";
         $rgridConfigUrl = $this->getRgridConfigUrl();
         $this->multiRegister([
@@ -120,19 +136,26 @@ class DojoLoaderViewHelper extends AbstractHelper
         $dojoConfigString = $this->generateDojoConfig();
         $view->headScript()->appendScript("var dojoConfig = JSON.parse('$dojoConfigString');");
         $view->headLink()
-            //->appendStylesheet('https://ajax.googleapis.com/ajax/libs/dojo/1.11.1/dojo/resources/dojo.css')
             ->appendStylesheet("https://cdn.jsdelivr.net/npm/rgrid@$this->rgridVersion/themes/flat/flat.css")
             ->appendStylesheet("https://cdn.jsdelivr.net/npm/rgrid@$this->rgridVersion/lib/css/rgrid.css");
         $view->headScript()->appendFile('https://ajax.googleapis.com/ajax/libs/dojo/1.11.1/dojo/dojo.js');
         $view->inlineScript()->appendScript("require(['dojo/dom-class','dojo/_base/window'], 
                                           (domClass, window) => {domClass.add(window.body(), 'flat');});");
+
+        $this->isInitialised = true;
     }
 
+    /**
+     * @return string
+     */
     protected function getRgridConfigUrl()
     {
         return "http://$_SERVER[HTTP_HOST]/";
     }
 
+    /**
+     * @return string
+     */
     protected function generateDojoConfig()
     {
         $packagesJson = $this->generatePackagesJson();
@@ -140,6 +163,9 @@ class DojoLoaderViewHelper extends AbstractHelper
         return "{\"async\": true, \"isDebug\": $isDebug, \"packages\": $packagesJson}";
     }
 
+    /**
+     * @return string
+     */
     protected function generatePackagesJson()
     {
         return json_encode($this->packages);

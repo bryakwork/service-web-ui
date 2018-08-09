@@ -11,11 +11,13 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Zend\Cache\ConfigProvider::class,
     \Zend\I18n\ConfigProvider::class,
     \rollun\actionrender\ConfigProvider::class,
     \rollun\Crud\ConfigProvider::class,
     \rollun\webUI\ConfigProvider::class,
     \rollun\logger\ConfigProvider::class,
+    \rollun\datastore\ConfigProvider::class,
     \Zend\Validator\ConfigProvider::class,
     \Zend\Log\ConfigProvider::class,
     \Zend\Db\ConfigProvider::class,

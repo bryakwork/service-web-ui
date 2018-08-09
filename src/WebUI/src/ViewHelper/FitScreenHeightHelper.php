@@ -15,7 +15,7 @@ class FitScreenHeightHelper extends AbstractHelper
 {
     public function __invoke()
     {
-        return '
+        return'
         <script>
 	        require([\'dojo/dom-style\', \'dojo/dom\', \'dojo/_base/window\'], (domStyle, dom, win) => {
 		    const bodyHeight = domStyle.get(win.body(), \'height\'),

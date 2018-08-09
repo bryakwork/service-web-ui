@@ -10,23 +10,20 @@ namespace rollun\webUI\ViewHelper;
 
 use Zend\View\Helper\AbstractHelper;
 
-class LayoutConfigHelper extends AbstractHelper
+class LeftSideBarHelper extends AbstractHelper
 {
+    const KEY_PARAMS = 'lsbParams';
     /**
      * @param $navbarConfig {array}
      * @param $lsbConfig {array}
      */
-    public function __invoke($navbarConfig, $lsbConfig)
+    public function __invoke($lsbConfig)
     {
         $view = $this->getView();
-        $navbarConfigJson = json_encode($navbarConfig);
         $leftSideBarConfigJson = json_encode($lsbConfig);
         $script =
-            "require(['dojo/dom','rgrid/NavPanes', 'rgrid/NavMenu'], (dom,NavPanes,NavMenu) => {
-                const navbarConfig = JSON.parse('$navbarConfigJson'),
-                lsbConfig = JSON.parse('$leftSideBarConfigJson'),
-                navMenu= new NavMenu({menuConfig: navbarConfig});
-                navMenu.placeAt(dom.byId('r-nav-dropdowns'));
+            "require(['dojo/dom','rgrid/NavPanes'], (dom,NavPanes) => {
+                const lsbConfig = JSON.parse('$leftSideBarConfigJson'),
                 navPanes = new NavPanes({layoutConfig: lsbConfig});
 	            navPanes.placeAt(dom.byId('r-nav-list'));
 	        });

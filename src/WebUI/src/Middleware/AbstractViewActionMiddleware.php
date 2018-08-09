@@ -5,7 +5,8 @@ namespace rollun\webUI\Middleware;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use rollun\actionrender\Renderer\Html\HtmlParamResolver;
+use rollun\actionrender\Renderer\AbstractRenderer;
+use rollun\webUI\ParamNameIntersectionException;
 
 /**
  * Created by PhpStorm.
@@ -17,12 +18,15 @@ abstract class AbstractViewActionMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        //добавить сюда слияние с requestParams из запроса
-        $responseParams = $request->getAttribute('responseData');
-        $responseParams = isset($responseParams)? $responseParams: [];
-        $newQueryParams = array_merge($this->getViewParams(), $responseParams);
-        $request = $request->withAttribute('responseData', $newQueryParams);
-
+        $responseData = $request->getAttribute(AbstractRenderer::RESPONSE_DATA);
+        $viewParams = $this->getViewParams();
+        if (isset($responseData)) {
+            $this->checkForParamsIntersection($responseData,$viewParams);
+            $newResponseParams = array_merge($responseData, $viewParams);
+        } else {
+            $newResponseParams = $viewParams;
+        }
+        $request = $request->withAttribute(AbstractRenderer::RESPONSE_DATA, $newResponseParams);
         $response = $delegate->process($request);
         return $response;
     }
@@ -32,4 +36,17 @@ abstract class AbstractViewActionMiddleware implements MiddlewareInterface
      */
     abstract protected function getViewParams();
 
+    protected function checkForParamsIntersection($responseData, $viewParams)
+    {
+        $intersections = array_intersect(array_keys($responseData), array_keys($viewParams));
+        if (count($intersections) > 0) {
+            $paramNamesThatIntersect = '';
+            foreach ($intersections as $paramName => $paramValue) {
+                $paramNamesThatIntersect .= "$paramName, ";
+            }
+            $paramNamesThatIntersect = rtrim($paramNamesThatIntersect, ', ');
+            throw new ParamNameIntersectionException(
+                'Following param names are already used by another middleware' . $paramNamesThatIntersect);
+        }
+    }
 }

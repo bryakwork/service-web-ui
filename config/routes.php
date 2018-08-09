@@ -15,5 +15,8 @@
 
 /** @var \Zend\Expressive\Application $app */
 
+$app->route('/api/datastore[/{resourceName}[/{id}]]', 'api-datastore', ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], 'api-datastore');
+
 //template name is parsed from route name (<namespace>-<templateName>)
 $app->route('/', 'navigationPage', ['GET'], 'webUi-homepage');
+$app->route('/example-grid', 'exampleGridPage', ['GET'], 'webUi-exampleGrid');
