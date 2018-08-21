@@ -71,11 +71,11 @@ class ConfigProvider
     {
         return [
             'aliases' => [
-                'dojo' => DojoLoaderViewHelper::class,
+                'dojoLoader' => DojoLoaderViewHelper::class,
                 'addLsb' => LeftSideBarHelper::class,
-                'navbar' => NavbarHelper::class,
+                'addNavbar' => NavbarHelper::class,
                 'fitScreenHeight' => FitScreenHeightHelper::class,
-                'addRgrid' => RgridHelper::class
+                'rgrid' => RgridHelper::class
             ],
             'factories' => [
                 DojoLoaderViewHelper::class => InvokableFactory::class,

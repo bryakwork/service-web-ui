@@ -32,7 +32,6 @@
         min-height: fit-content;
     }
     .r-column-label {
-        margin: 1.5rem 0.25rem 0.75rem 0.25rem;
         text-align: center;
         font-weight: 500;
         line-height: 1.2;
@@ -59,58 +58,64 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid p-0 r-content-container" id="r-content-container">
+<div class="container-fluid r-content-container pt-2 px-0" id="r-content-container">
     <div class="row m-0">
         <div class="col-md-2 sidebar p-1 r-nav-list" id="r-nav-list">
-            <div class="r-column-label">МЕНЮ</div>
+            <div class="p-1 r-column-label">
+                МЕНЮ
+            </div>
         </div>
-        <div class="col-md-8 main px-1 border-right border-left r-content-column" id="r-content-column">
+        <div class="col-md-8 main px-1 r-content-column border-right border-left" id="r-content-column">
             <?php echo $this->content ?>
         </div>
         <div class="col-md-2 p-1 r-event-sidebar">
-            <div class="r-column-label">УВЕДОМЛЕНИЯ</div>
-            <div class="card mb-2">
-                <div class="mb-1 px-1 card-title bg-info">
+            <div class="p-1 r-column-label">
+                УВЕДОМЛЕНИЯ
+            </div>
+            <div class="card mb-2" style="min-height: 3rem">
+                <div class="mb-0 px-2 py-1 card-title bg-info">
                     <div>
                         Уведомление
                         <i class="fas fa-times" style="position: relative; float: right; margin: 2px; color: white;"></i>
                     </div>
                 </div>
-                <div class="card-body p-1">
-                    <p class="card-text">Здесь в ближайшем будущем появятся системные уведомления, еееее! </p>
+                <div class="card-body p-2">
+                    <p class="card-text mb-1">Здесь в ближайшем будущем появятся системные уведомления, еееее! </p>
                 </div>
             </div>
             <div class="card mb-2">
-                <div class="mb-1 px-1 card-title bg-danger">
+                <div class="mb-0 px-2 py-1 card-title bg-danger">
                     <div>
                         Критическая ошибка
                         <i class="fas fa-times" style="position: relative; float: right; margin: 2px; color: white;"></i>
                     </div>
                 </div>
-                <div class="card-body p-1">
-                    <p class="card-text">CСообщение о критической ошибке</p>
+                <div class="card-body p-2">
+                    <p class="card-text mb-1">CСообщение о критической ошибке</p>
+                    <a href="#" class="btn btn-sm btn-primary">Действие</a>
+                    <a href="#" class="btn btn-sm btn-secondary">Действие 2</a>
                 </div>
             </div>
             <div class="card mb-2">
-                <div class="mb-1 px-1 card-title bg-warning">
+                <div class="mb-0 px-2 py-1 card-title bg-warning">
                     <div>
                         Ошибка
                         <i class="fas fa-times" style="position: relative; float: right; margin: 2px; color: white;"></i>
                     </div>
                 </div>
-                <div class="card-body p-1">
-                    <p class="card-text">Сообщение об ошибке</p>
+                <div class="card-body p-2">
+                    <p class="card-text mb-1">Сообщение об ошибке</p>
                 </div>
             </div>
             <div class="card mb-2">
-                <div class="mb-1 px-1 card-title bg-success">
+                <div class="mb-0 px-2 py-1 card-title bg-success">
                     <div>
                         Успех
                         <i class="fas fa-times" style="position: relative; float: right; margin: 2px; color: white;"></i>
                     </div>
                 </div>
-                <div class="card-body p-1">
-                    <p class="card-text">Сообщение об успехе</p>
+                <div class="card-body p-2">
+                    <p class="card-text mb-1">Сообщение об успехе</p>
                 </div>
             </div>
         </div>

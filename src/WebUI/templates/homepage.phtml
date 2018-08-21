@@ -1,11 +1,13 @@
 <?php
-$this->dojo()->setDebug(true);
-$this->dojo()->addLoader();
-$this->navbar();
+$this->dojoLoader()->setDebug(true);
+$this->dojoLoader()->render();
+$this->addNavbar();
 $this->addLsb($this->lsbParams);
 ?>
 <?= $this->fitScreenHeight()?>
-<h5>Контент</h5>
+<div class="p-1 r-column-label" style="font-size: 1.25rem;">
+    ТЕСТОВАЯ СТРАНИЦА
+</div>
 <div id='some-content'>
     всякая полезная информация
 </div>

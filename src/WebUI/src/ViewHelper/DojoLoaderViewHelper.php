@@ -58,6 +58,7 @@ class DojoLoaderViewHelper extends AbstractHelper
             case 'rollun-rql':
                 {
                     $this->rollunRqlVersion = $version;
+                    break;
                 }
             default:
                 {
@@ -105,7 +106,7 @@ class DojoLoaderViewHelper extends AbstractHelper
         $this->debugMode = $isDebug;
     }
 
-    public function addLoader()
+    public function render()
     {
         if ($this->isInitialised) {
             return;

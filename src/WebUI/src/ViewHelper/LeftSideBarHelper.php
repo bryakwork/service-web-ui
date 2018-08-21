@@ -14,7 +14,6 @@ class LeftSideBarHelper extends AbstractHelper
 {
     const KEY_PARAMS = 'lsbParams';
     /**
-     * @param $navbarConfig {array}
      * @param $lsbConfig {array}
      */
     public function __invoke($lsbConfig)

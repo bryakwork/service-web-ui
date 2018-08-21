@@ -14,14 +14,30 @@ class RgridHelper extends AbstractHelper
 {
 
     protected $rgridVersion = '0.4.22';
+    protected $params;
+    protected $startPageNumber;
 
-    public function __invoke($params, $startPage = null)
+
+    public function setParams($params)
+    {
+        $this->params = $params;
+    }
+
+    public function setStartPage($startPageNumber)
+    {
+        $this->startPageNumber = $startPageNumber;
+    }
+
+    public function render()
     {
         $view = $this->getView();
-        $this->rgridVersion = $view->dojo()->getVersions()['rgrid'];
-        $view->dojo()->addLoader();
+        $this->rgridVersion = $view->dojoLoader()->getVersions()['rgrid'];
+        $view->dojoLoader()->render();
         $this->addDojoStyles($view);
-        $paramsString = json_encode($params);
+        if ($this->startPageNumber !== null) {
+            $startPage = $this->startPageNumber;
+        }
+        $paramsString = json_encode($this->params);
         $gridScript = "
             require(
                 [
