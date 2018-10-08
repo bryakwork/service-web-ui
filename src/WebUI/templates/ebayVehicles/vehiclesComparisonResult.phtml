@@ -1,0 +1,9 @@
+<?php $this->dojoLoader()->changeVersion('rgrid', '0.5.9'); ?>
+<?= $this->fitScreenHeight()?>
+<?php $this->rgrid()->setParams([
+    [
+        'id' => 'rgrid',
+        'gridTarget' => '/api/datastore/ebay-rocky-mountain-compatibility'// имя хранилища, которое отрисует таблица
+    ]
+])?>
+<?= $this->rgrid()->render()?>

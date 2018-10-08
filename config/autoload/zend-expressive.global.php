@@ -7,7 +7,7 @@ return [
     // directive, to disable configuration caching. Toggling development mode
     // will also disable it by default; clear the configuration cache using
     // `composer clear-config-cache`.
-    ConfigAggregator::ENABLE_CACHE => true,
+    ConfigAggregator::ENABLE_CACHE => false,
 
     // Enable debugging; typically used to provide debugging information within templates.
     'debug' => false,
@@ -20,8 +20,8 @@ return [
         // Provide templates for the error handling middleware to use when
         // generating responses.
         'error_handler' => [
-            'template_404'   => 'error::404',
-            'template_error' => 'error::error',
+            'template_404'   => 'crudError::404',
+            'template_error' => 'crudError::error',
         ],
     ],
 ];

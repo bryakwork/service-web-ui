@@ -1,0 +1,13 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: USER_T
+ * Date: 13.09.2018
+ * Time: 11:40
+ */
+$this->dojoLoader()->changeVersion('rgrid', '0.5.4');
+$this->dojoLoader()->render();
+$this->rgrid()->setParams($this->rgridParams);
+echo $this->rgrid()->render();
+echo $this->fitScreenHeight();
+

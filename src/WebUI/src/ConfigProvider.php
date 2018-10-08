@@ -11,12 +11,12 @@ namespace rollun\webUI;
 
 use rollun\actionrender\Factory\ActionRenderAbstractFactory;
 use rollun\webUI\Middleware\NavPageActionMiddleware;
-use rollun\webUI\ViewHelper\DojoLoaderViewHelper;
-use rollun\webUI\ViewHelper\Factory\NavbarHelperFactory;
-use rollun\webUI\ViewHelper\FitScreenHeightHelper;
-use rollun\webUI\ViewHelper\LeftSideBarHelper;
-use rollun\webUI\ViewHelper\NavbarHelper;
-use rollun\webUI\ViewHelper\RgridHelper;
+use rollun\webUI\Helper\DojoLoaderViewHelper;
+use rollun\webUI\Helper\Factory\NavbarHelperFactory;
+use rollun\webUI\Helper\FitScreenHeightHelper;
+use rollun\webUI\Helper\LeftSideBarHelper;
+use rollun\webUI\Helper\NavbarHelper;
+use rollun\webUI\Helper\RgridHelper;
 use Zend\Expressive\Template\TemplateRendererInterface;
 use Zend\Expressive\ZendView\HelperPluginManagerFactory;
 use Zend\Expressive\ZendView\ZendViewRendererFactory;
@@ -31,7 +31,7 @@ class ConfigProvider
             'dependencies' => $this->getDependencies(),
             'templates' => $this->getTemplates(),
             ActionRenderAbstractFactory::KEY => $this->getActionRender(),
-            'view_helpers' => $this->getViewHelpers(),
+            //'view_helpers' => $this->getViewHelpers(),
         ];
     }
 
@@ -40,9 +40,16 @@ class ConfigProvider
         return [
             'paths' => [
                 'webUi' => [__DIR__ . '/../templates/'],
-                'webUiLayouts' => [__DIR__ . '/../templates/layouts/']
+                'webUiLayouts' => [__DIR__ . '/../templates/layouts/'],
+                'ebayVehicles' => [__DIR__ . '/../templates/ebayVehicles/'],
+                'saas' => [__DIR__ . '/../templates/saas/'],
             ],
-            'layout' => 'webUiLayouts::august-layout',
+            //'layout' => 'webUiLayouts::august-layout',
+            'layout' => 'webUiLayouts::september-layout',
+            'map' => [
+                'error::404' => 'crudError::404',
+                'error::error' => 'crudError::error',
+            ]
         ];
     }
 

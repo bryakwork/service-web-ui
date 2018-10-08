@@ -19,4 +19,9 @@ $app->route('/api/datastore[/{resourceName}[/{id}]]', 'api-datastore', ['GET', '
 
 //template name is parsed from route name (<namespace>-<templateName>)
 $app->route('/', 'navigationPage', ['GET'], 'webUi-homepage');
+$app->route('/login', 'loginPage', ['GET', 'POST'], 'webUi-login');
 $app->route('/example-grid', 'exampleGridPage', ['GET'], 'webUi-exampleGrid');
+
+$app->route('/vehicles/compare-vehicles', 'compareVehiclesPage', ['GET'], 'ebayVehicles-vehiclesCompare');
+$app->route('/vehicles/vehicles-list-processor', 'vehicleListProcessorPage', ['GET'], 'ebayVehicles-vehiclesListProcessor');
+$app->route('/vehicles/vehicles-comparison-result', 'vehiclesComparisonResult', ['GET'], 'ebayVehicles-vehiclesComparisonResult');

@@ -6,12 +6,12 @@
  * Time: 14:08
  */
 
-namespace rollun\webUI\ViewHelper\Factory;
+namespace rollun\webUI\Helper\Factory;
 
 
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
-use rollun\webUI\ViewHelper\NavbarHelper;
+use rollun\webUI\Helper\NavbarHelper;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Factory\FactoryInterface;

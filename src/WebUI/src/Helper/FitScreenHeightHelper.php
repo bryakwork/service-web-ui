@@ -6,7 +6,7 @@
  * Time: 21:24
  */
 
-namespace rollun\webUI\ViewHelper;
+namespace rollun\webUI\Helper;
 
 
 use Zend\View\Helper\AbstractHelper;

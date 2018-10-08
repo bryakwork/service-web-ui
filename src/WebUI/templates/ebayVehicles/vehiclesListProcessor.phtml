@@ -1,0 +1,282 @@
+<?php $this->dojoLoader()->changeVersion('rgrid', '0.5.9'); ?>
+<div>
+    <h4>Список транспорта на Ebay</h4>
+    <?php
+    $this->rgrid()->setParams([
+        [
+            'id' => 'rgrid',
+            'gridTarget' => '/api/datastore/ebay-vehicles'
+        ]
+    ]);
+    echo $this->rgrid()->render();
+    ?>
+</div>
+<div class="pb-4 border-bottom mb-4">
+    <h4>Процессоры для транспорта на Ebay</h4>
+    <script>
+		require([
+			'dojo/dom-class',
+			'dojo/_base/window',
+			'rgrid/Composite/RComposite',
+			'rgrid/Composite/WidgetFactory',
+			'rgrid/Composite/TemplateWidgetPlacer',
+			'rgrid/prefabs/ConditionsInMenu',
+			'rgrid/prefabs/Pagination',
+			'rgrid/prefabs/Rgrid',
+			'rgrid/prefabs/Search',
+			'dstore/Memory',
+			'dojo/text!rgrid-examples/testTemplate.html',
+			'config/RgridConfig',
+			'rgrid/prefabs/VehicleProcessorDataInserter',
+		], function (domClass,
+					 win,
+					 RComposite,
+					 WidgetFactory,
+					 WidgetPlacer,
+					 ConditionsInMenu,
+					 PaginationPrefab,
+					 RgridPrefab,
+					 SearchPrefab,
+					 Memory,
+					 template,
+					 config,
+					 VehicleProcessorDataInserterPrefab) {
+			domClass.add(win.body(), 'flat');
+			const dataStoreUrl ='/api/datastore/ebay-processors',
+				processorHistoryStoreUrl = '/api/datastore/ebay-hash-history',
+				appParams = [
+					{
+						'id': 'rgrid',
+						'gridTarget': dataStoreUrl
+					},
+					{
+						'id': 'vehicleProcessorDataInserter',
+						'targetUrl': dataStoreUrl
+					},
+					{
+						"id": "conditionsInMenu",
+						"actionMenuConfig": [
+							{
+								"label": "Посмотреть историю процессинга", // Надпись на кнопке
+								"action": function (dataRow) {
+									fetch(processorHistoryStoreUrl+ '/' +'id', {
+										method: 'GET',
+										headers: new Headers([
+											['Content-Type', 'application/json'],
+											['Accept', 'application/json']
+										]),
+									}).then((response) => {
+										require([
+											'dstore/Memory',
+											'dgrid/OnDemandGrid',
+											'dijit/Dialog',
+											'dojo/dom-construct'
+										], function (Memory, OnDemandGrid, Dialog, domConstruct) {
+											response.text().then((responseText) => {
+													const historyStore = new Memory({data: JSON.parse(responseText)}),
+														domNode = domConstruct.toDom('<div class="p-1"></div>'),
+														historyGrid = new OnDemandGrid({
+															collection: historyStore,
+															columns: [
+																{
+																	label: 'Процессор',
+																	field: 'id'
+																},
+																{
+																	label: 'Производитель',
+																	field: 'make'
+																},
+																{
+																	label: 'Модель',
+																	field: 'model'
+																},
+																{
+																	label: 'Год',
+																	field: 'year'
+																},
+																{
+																	label: 'Хеш',
+																	field: 'hash'
+																}
+															]
+														}),
+														historyModal = new Dialog({
+															title: 'История изменений',
+															content: domNode
+														});
+													historyModal.show();
+													historyGrid.resize();
+												}
+											)
+										})
+									});
+								}
+							},
+						]
+					},
+				],
+				factory = new WidgetFactory(),
+				placer = new WidgetPlacer();
+			config.push(...appParams);
+			const configStore = new Memory({data: config}),
+				composite = new RComposite({
+					widgetFactory: factory,
+					widgetPlacer: placer,
+					configStore: configStore,
+					templateString: template
+				}),
+				prefabs = [
+					new RgridPrefab(),
+					new ConditionsInMenu(),
+					new PaginationPrefab({startingPage: null}),
+					new SearchPrefab(),
+					new VehicleProcessorDataInserterPrefab()
+				];
+			composite.addComponents(prefabs);
+			composite.placeAt(document.getElementById("ebay-processors"));
+			composite.startup();
+		})
+    </script>
+    <div id="ebay-processors"></div>
+</div>
+<div>
+    <h4>Список транспорта на Rocky Mountain</h4>
+    <?php
+    $this->rgrid()->setParams([
+        [
+            'id' => 'rgrid',
+            'gridTarget' => '/api/datastore/rocky-vehicles'
+        ]
+    ]);
+    echo $this->rgrid()->render();
+    ?>
+</div>
+<div>
+    <h4>Процессоры для транспорта Rocky Mountain</h4>
+    <script>
+		require([
+			'dojo/dom-class',
+			'dojo/_base/window',
+			'rgrid/Composite/RComposite',
+			'rgrid/Composite/WidgetFactory',
+			'rgrid/Composite/TemplateWidgetPlacer',
+			'rgrid/prefabs/ConditionsInMenu',
+			'rgrid/prefabs/Pagination',
+			'rgrid/prefabs/Rgrid',
+			'rgrid/prefabs/Search',
+			'dstore/Memory',
+			'dojo/text!rgrid-examples/testTemplate.html',
+			'config/RgridConfig',
+			'rgrid/prefabs/VehicleProcessorDataInserter',
+		], function (domClass,
+					 win,
+					 RComposite,
+					 WidgetFactory,
+					 WidgetPlacer,
+					 ConditionsInMenu,
+					 PaginationPrefab,
+					 RgridPrefab,
+					 SearchPrefab,
+					 Memory,
+					 template,
+					 config,
+					 VehicleProcessorDataInserterPrefab) {
+			domClass.add(win.body(), 'flat');
+			const dataStoreUrl = '/api/datastore/rocky-processors',
+				processorHistoryStoreUrl = '/api/datastore/rocky-hash-history',
+				appParams = [
+					{
+						'id': 'rgrid',
+						'gridTarget': dataStoreUrl
+					},
+					{
+						'id': 'vehicleProcessorDataInserter',
+						'targetUrl': dataStoreUrl
+					},
+					{
+						"id": "conditionsInMenu",
+						"actionMenuConfig": [
+							{
+								"label": "Посмотреть историю процессинга", // Надпись на кнопке
+								"action": function (dataRow) {
+									fetch(processorHistoryStoreUrl + '/' + dataRow.id, {
+										method: 'GET',
+										headers: new Headers([
+											['Content-Type', 'application/json'],
+											['Accept', 'application/json']
+										]),
+									}).then((response) => {
+										require([
+											'dstore/Memory',
+											'dgrid/OnDemandGrid',
+											'dijit/Dialog',
+											'dojo/dom-construct'
+										], function (Memory, OnDemandGrid, Dialog, domConstruct) {
+											response.text().then((responseText) => {
+													const historyStore = new Memory({data: JSON.parse(responseText)}),
+														domNode = domConstruct.toDom('<div class="p-1"></div>'),
+														historyGrid = new OnDemandGrid({
+															collection: historyStore,
+															columns: [
+																{
+																	label: 'Процессор',
+																	field: 'id'
+																},
+																{
+																	label: 'Производитель',
+																	field: 'make'
+																},
+																{
+																	label: 'Модель',
+																	field: 'model'
+																},
+																{
+																	label: 'Год',
+																	field: 'year'
+																},
+																{
+																	label: 'Хеш',
+																	field: 'hash'
+																}
+															]
+														}),
+														historyModal = new Dialog({
+															title: 'История изменений',
+															content: domNode
+														});
+													historyModal.show();
+													historyGrid.resize();
+												}
+											)
+										})
+									});
+								}
+							},
+						]
+					},
+				],
+				factory = new WidgetFactory(),
+				placer = new WidgetPlacer();
+			config.push(...appParams);
+			const configStore = new Memory({data: config}),
+				composite = new RComposite({
+					widgetFactory: factory,
+					widgetPlacer: placer,
+					configStore: configStore,
+					templateString: template
+				}),
+				prefabs = [
+					new RgridPrefab(),
+					new ConditionsInMenu(),
+					new PaginationPrefab({startingPage: null}),
+					new SearchPrefab(),
+					new VehicleProcessorDataInserterPrefab()
+				];
+			composite.addComponents(prefabs);
+			composite.placeAt(document.getElementById("rocky-processors"));
+			composite.startup();
+		})
+    </script>
+    <div id="rocky-processors"></div>
+</div>
+<button class="btn btn-primary py-3 mx-1 my-2 w-100">Найти соответствия</button>

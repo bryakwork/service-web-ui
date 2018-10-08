@@ -6,7 +6,7 @@
  * Time: 18:32
  */
 
-namespace rollun\webUI\ViewHelper;
+namespace rollun\webUI\Helper;
 
 
 use Exception;
@@ -15,7 +15,7 @@ use Zend\View\Helper\AbstractHelper;
 class DojoLoaderViewHelper extends AbstractHelper
 {
     protected $isInitialised = false;
-    protected $rgridVersion = '0.4.24';
+    protected $rgridVersion = '0.5.0';
     protected $rollunRqlVersion = '0.3.8';
     protected $debugMode = false;
 

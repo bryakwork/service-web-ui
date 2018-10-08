@@ -9,7 +9,7 @@
 namespace rollun\webUI\Middleware;
 
 
-use rollun\webUI\ViewHelper\LeftSideBarHelper;
+use rollun\webUI\Helper\LeftSideBarHelper;
 
 class ExampleGridPageActionMiddleware extends AbstractViewActionMiddleware
 {
@@ -22,9 +22,9 @@ class ExampleGridPageActionMiddleware extends AbstractViewActionMiddleware
         return [
             'rgridParams' => [
                 [
-                    'id' => 'gridTarget',
-                    'url' => '/api/datastore/equipments',
-                ],
+                    'id' => 'rgrid',
+                    'gridTarget' => 'api/datastore/equipments-db'
+                ]
             ],
             LeftSideBarHelper::KEY_PARAMS => [
                 [

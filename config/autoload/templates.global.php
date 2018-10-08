@@ -12,10 +12,6 @@ return [
             HelperPluginManager::class => HelperPluginManagerFactory::class,
         ],
     ],
-/*
-    'templates' => [
-        'layout' => 'layout::default',
-    ],*/
 
     'view_helpers' => [
         // zend-servicemanager-style configuration for adding view helpers:

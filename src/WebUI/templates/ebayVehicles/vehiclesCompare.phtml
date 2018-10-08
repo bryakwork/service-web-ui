@@ -1,0 +1,20 @@
+<?php
+$this->dojoLoader()->changeVersion('rgrid','0.5.4');
+$this->rgrid()->setParams([
+    [
+        'id' => 'rgrid',
+        'gridTarget' => '/api/datastore/ebay-vehicles'// имя хранилища, которое отрисует таблица
+    ]
+])?>
+<?= $this->rgrid()->render()?>
+
+
+<?php $this->rgrid()->setParams([
+    [
+        'id' => 'rgrid',
+        'gridTarget' => '/api/datastore/rocky-vehicles'// имя хранилища, которое отрисует таблица
+    ]
+])?>
+<?= $this->rgrid()->render()?>
+
+<?= $this->fitScreenHeight()?>
