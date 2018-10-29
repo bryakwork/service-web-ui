@@ -8,8 +8,7 @@
 
 namespace rollun\webUI\Middleware;
 
-
-use rollun\webUI\Helper\LeftSideBarHelper;
+use rollun\Crud\Helper\LeftSideBarHelper;
 
 class ExampleGridPageActionMiddleware extends AbstractViewActionMiddleware
 {

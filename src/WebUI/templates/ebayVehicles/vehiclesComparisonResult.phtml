@@ -1,9 +1,17 @@
-<?php $this->dojoLoader()->changeVersion('rgrid', '0.5.9'); ?>
+<?php $this->dojoLoader()->changeVersion('rgrid', '0.5.10'); ?>
 <?= $this->fitScreenHeight()?>
 <?php $this->rgrid()->setParams([
     [
         'id' => 'rgrid',
-        'gridTarget' => '/api/datastore/ebay-rocky-mountain-compatibility'// имя хранилища, которое отрисует таблица
+        'gridTarget' => '/api/datastore/ebay-rocky-mountain-compatibility',// имя хранилища, которое отрисует таблица,
+        'columnParams' => [
+            'rocky_mountain_vehicles' => [
+                'formatter' => 'func{preserveNewLine}'
+            ],
+            'ebay_vehicles' => [
+                'formatter' => 'func{preserveNewLine}'
+            ]
+]
     ]
 ])?>
 <?= $this->rgrid()->render()?>

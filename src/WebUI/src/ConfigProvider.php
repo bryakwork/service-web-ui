@@ -31,7 +31,7 @@ class ConfigProvider
             'dependencies' => $this->getDependencies(),
             'templates' => $this->getTemplates(),
             ActionRenderAbstractFactory::KEY => $this->getActionRender(),
-            //'view_helpers' => $this->getViewHelpers(),
+            'view_helpers' => $this->getViewHelpers(),
         ];
     }
 
@@ -44,11 +44,11 @@ class ConfigProvider
                 'ebayVehicles' => [__DIR__ . '/../templates/ebayVehicles/'],
                 'saas' => [__DIR__ . '/../templates/saas/'],
             ],
-            //'layout' => 'webUiLayouts::august-layout',
             'layout' => 'webUiLayouts::september-layout',
             'map' => [
                 'error::404' => 'crudError::404',
                 'error::error' => 'crudError::error',
+                'layout::default' => 'webUiLayouts::september-layout',
             ]
         ];
     }
@@ -76,22 +76,7 @@ class ConfigProvider
 
     protected function getViewHelpers()
     {
-        return [
-            'aliases' => [
-                'dojoLoader' => DojoLoaderViewHelper::class,
-                'addLsb' => LeftSideBarHelper::class,
-                'addNavbar' => NavbarHelper::class,
-                'fitScreenHeight' => FitScreenHeightHelper::class,
-                'rgrid' => RgridHelper::class
-            ],
-            'factories' => [
-                DojoLoaderViewHelper::class => InvokableFactory::class,
-                LeftSideBarHelper::class => InvokableFactory::class,
-                FitScreenHeightHelper::class => InvokableFactory::class,
-                NavbarHelper::class => NavbarHelperFactory::class,
-                RgridHelper::class => InvokableFactory::class
-            ]
-        ];
+        return [];
     }
 
 }

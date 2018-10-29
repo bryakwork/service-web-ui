@@ -2,18 +2,19 @@
 /**
  * Created by PhpStorm.
  * User: USER_T
- * Date: 07.09.2018
- * Time: 13:31
+ * Date: 29.10.2018
+ * Time: 17:11
  */
 
 namespace rollun\webUI\Middleware;
+
 
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class VehiclesListProcessorAction implements MiddlewareInterface
+class NoopAction implements MiddlewareInterface
 {
 
     /**

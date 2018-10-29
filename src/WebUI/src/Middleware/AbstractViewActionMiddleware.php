@@ -32,6 +32,7 @@ abstract class AbstractViewActionMiddleware implements MiddlewareInterface
     }
 
     /**
+     *
      * @return mixed array -  params that will be passed to view helpers
      */
     abstract protected function getViewParams();
